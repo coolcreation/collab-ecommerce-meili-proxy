@@ -129,7 +129,7 @@ Discord:                        https://discord.meilisearch.com
 ---
 
 
-**TAKE `master-key` that we can see above, and put it in .env file under `MEILI_MASTER_KEY`**
+**TAKE `master-key` that we can see above, and put it in .env file under `MEILI_MASTER_KEY`**  
 **Then use keyboard buttons `crtl + c` to kill terminal process**  
 
 **Now rebuild docker image:**
