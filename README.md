@@ -130,7 +130,8 @@ Discord:                        https://discord.meilisearch.com
 
 
 **TAKE `master-key` that we can see above, and put it in .env file under `MEILI_MASTER_KEY`**
-**Then use keyboard buttons `crtl + c` to kill terminal process**
+**Then use keyboard buttons `crtl + c` to kill terminal process**  
+
 **Now rebuild docker image:**
 ```
 docker build -t meili-proxy . 
@@ -141,11 +142,11 @@ docker build -t meili-proxy .
 docker stop $(docker ps -q)
 ```
 
-**Run image again, but it now has the proper `master-key`**
+**Run image again**
 ```
 docker run -p 7700:7700 -p 80:80 --env-file .env meili-proxy
 ```
-
+**It should look something like this, and now has the proper `master-key`**
 ```js
 888b     d888          d8b 888 d8b                                            888
 8888b   d8888          Y8P 888 Y8P                                            888
@@ -185,3 +186,4 @@ Proxy server running on port 3000
 2025-06-05T19:48:42.503065Z  INFO HTTP request{method=GET host="localhost:7700" route=/health query_parameters= user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0 status_code=200}: meilisearch: close time.busy=3.47ms time.idle=2.96ms
 2025-06-05T19:48:42.583567Z  INFO HTTP request{method=GET host="localhost:7700" route=/favicon.ico query_parameters= user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0 status_code=404}: meilisearch: close time.busy=27.5µs time.idle=9.43µs
 ```
+**It now says `A master key has been set`**
