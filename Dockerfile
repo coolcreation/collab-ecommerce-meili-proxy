@@ -2,7 +2,10 @@
 FROM node:22 AS builder
 
 # Install Meilisearch
-RUN curl -L https://install.meilisearch.com | sh
+# RUN curl -L https://install.meilisearch.com | sh
+RUN curl -L https://github.com/meilisearch/meilisearch/releases/download/v1.4.2/meilisearch-linux-amd64 -o /meilisearch \
+  && chmod +x /meilisearch
+
 
 # Create working dir for proxy
 WORKDIR /app
