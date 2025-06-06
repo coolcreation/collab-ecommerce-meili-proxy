@@ -16,11 +16,6 @@ build
 .git
 .gitignore
 
-# Ignore Docker-specific files 
-Dockerfile
-docker-compose.yml
-docker-compose.*
-
 # Ignore logs and temp files
 *.log
 npm-debug.log*
