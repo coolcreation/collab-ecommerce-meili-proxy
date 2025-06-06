@@ -1,20 +1,14 @@
-# Environment variables
 
 # Ignore all .env files
 **/.env 
-
-# Node.js specific
+.env*
 
 # Ignore all node_modules directories
 **/node_modules/
 
 # Ignore build artifacts
-dist
-build
-
-# Ignore Git files
-.git
-.gitignore
+dist/
+build/
 
 # Ignore logs and temp files
 *.log
@@ -25,6 +19,13 @@ yarn-error.log*
 *.swo
 *.tmp
 
+# Test coverage (Jest)
+coverage/
+
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+.vite/
+.vscode/
+.idea/
