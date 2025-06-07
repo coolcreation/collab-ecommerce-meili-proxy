@@ -27,6 +27,7 @@ app.use(
     onProxyReq: (proxyReq) => {
       if (process.env.MEILI_MASTER_KEY) {
         console.log("Injecting auth header to proxy request...");
+        console.log(`Injecting auth header: ${authHeader}`); // <--- ADD THIS LINE
         proxyReq.setHeader("Authorization", `Bearer ${process.env.MEILI_MASTER_KEY}`);
       } else {
         console.warn("MEILI_MASTER_KEY is missing in proxy env");
