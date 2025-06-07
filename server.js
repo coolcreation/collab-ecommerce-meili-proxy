@@ -6,19 +6,17 @@ dotenv.config()
 
 const app = express()
 
-// Health check for Render
-app.get('/', (req, res) => res.send('OK'))
+// Health check route must be above proxy
+app.get('/health', (req, res) => res.send('OK'))
 
-// Proxy all other routes to Meilisearch
+// Proxy all requests to /meili/* → Meilisearch
 app.use(
-  '/',
+  '/meili',
   createProxyMiddleware({
     target: process.env.MEILI_HOST || 'http://localhost:7700',
     changeOrigin: true,
-    pathRewrite: {
-      '^/': '/', // Optional, keeps paths clean
-    },
-    onProxyReq: (proxyReq, req, res) => {
+    pathRewrite: { '^/meili': '' }, // strip /meili before forwarding
+    onProxyReq: (proxyReq) => {
       if (process.env.MEILI_MASTER_KEY) {
         proxyReq.setHeader('Authorization', `Bearer ${process.env.MEILI_MASTER_KEY}`)
       }
