@@ -4,6 +4,9 @@ import dotenv from "dotenv"
 
 dotenv.config()
 
+// ADD THIS LINE HERE:
+console.log("Proxy's MEILI_MASTER_KEY at startup:", process.env.MEILI_MASTER_KEY);
+
 const app = express()
 
 // Health check route
