@@ -27,15 +27,29 @@ app.use(
     pathRewrite: {
       "^/": "/",
     },
-    onProxyReq: (proxyReq) => {
+
+    onProxyReq: (proxyReq, req, res) => { // Added req, res arguments for clarity, though not strictly needed here
+      console.log(`[ONPROXYREQ] Triggered for ${req.method} ${req.url}`); // <-- NEW TEST LOG
+
       if (process.env.MEILI_MASTER_KEY) {
-        console.log("Injecting auth header to proxy request...");
-        console.log(`Injecting auth header: ${authHeader}`); // <--- ADD THIS LINE
-        proxyReq.setHeader("Authorization", `Bearer ${process.env.MEILI_MASTER_KEY}`);
+        const authHeader = `Bearer ${process.env.MEILI_MASTER_KEY}`;
+        console.log(`[ONPROXYREQ] Injecting auth header: ${authHeader}`);
+        proxyReq.setHeader("Authorization", authHeader);
       } else {
-        console.warn("MEILI_MASTER_KEY is missing in proxy env");
+        console.warn("[ONPROXYREQ] MEILI_MASTER_KEY is missing in proxy env during onProxyReq!");
       }
     },
+
+    // onProxyReq: (proxyReq) => {
+    //   if (process.env.MEILI_MASTER_KEY) {
+    //     console.log("Injecting auth header to proxy request...");
+    //     console.log(`Injecting auth header: ${authHeader}`); // <--- ADD THIS LINE
+    //     proxyReq.setHeader("Authorization", `Bearer ${process.env.MEILI_MASTER_KEY}`);
+    //   } else {
+    //     console.warn("MEILI_MASTER_KEY is missing in proxy env");
+    //   }
+    // },
+    
     // Consider adding these for deeper debugging if it still fails:
     onError: (err, req, res) => {
         console.error('Proxy Error:', err.message);
